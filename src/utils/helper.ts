@@ -114,12 +114,15 @@ export const generatePDF = async (
 ) => {
   if (!currentRef) return;
   const template = currentRef.getTemplate();
+
   const options = currentRef.getOptions();
   const inputs =
     typeof (currentRef as Viewer | Form).getInputs === "function"
       ? (currentRef as Viewer | Form).getInputs()
       : getInputFromTemplate(template);
   const font = getFontsData();
+
+  console.log("template", template, inputs);
 
   try {
     const pdf = await generate({
