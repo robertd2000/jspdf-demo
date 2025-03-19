@@ -37,6 +37,33 @@ const PDFEditor = () => {
         },
         plugins: getPlugins(),
       });
+
+      const customUI = document.createElement("div");
+      customUI.style.position = "absolute";
+      customUI.style.top = "10px";
+      customUI.style.right = "10px";
+      customUI.style.zIndex = "1000";
+      customUI.style.backgroundColor = "white";
+      customUI.style.padding = "10px";
+      customUI.style.border = "1px solid #ccc";
+      customUI.style.borderRadius = "5px";
+
+      const fontSelect = document.createElement("select");
+      fontSelect.innerHTML = `
+        <option value='helvetica'>Helvetica</option>
+        <option value='times'>Times</option>
+        <option value='courier'>Courier</option>
+        <option value='CustomFont'>Custom Font</option>
+      `;
+      // fontSelect.value = selectedFont;
+      // fontSelect.addEventListener("change", (e) => {
+      //   const font = (e.target as HTMLSelectElement).value;
+      //   setSelectedFont(font);
+      //   designer.current?.updateOptions({ font });
+      // });
+
+      customUI.appendChild(fontSelect);
+      designerRef.current.appendChild(customUI);
     } catch {
       localStorage.removeItem("template");
     }
